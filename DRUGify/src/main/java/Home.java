@@ -1,3 +1,7 @@
+
+import javax.swing.DefaultListModel;
+
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,7 +13,7 @@
  * @author akash
  */
 public class Home extends javax.swing.JFrame {
-
+     DefaultListModel model;
     /**
      * Creates new form Home
      */
@@ -32,11 +36,17 @@ public class Home extends javax.swing.JFrame {
         lbl2 = new javax.swing.JLabel();
         r1 = new javax.swing.JRadioButton();
         r2 = new javax.swing.JRadioButton();
-        jLabel6 = new javax.swing.JLabel();
+        go1 = new javax.swing.JButton();
+        go2 = new javax.swing.JButton();
+        btnClear = new javax.swing.JButton();
+        remarks = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        model = new DefaultListModel();
+        list2 = new javax.swing.JList(model);
+        jScrollPane2 = new javax.swing.JScrollPane();
+        list1 = new javax.swing.JList(model);
         jScrollPane1 = new javax.swing.JScrollPane();
         TextArea = new javax.swing.JTextArea();
-        list1 = new java.awt.List();
-        list2 = new java.awt.List();
         tfSearch = new javax.swing.JTextField();
         searchBtn = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -44,18 +54,26 @@ public class Home extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jPanel1.setLayout(null);
 
         lbl1.setForeground(new java.awt.Color(1, 1, 1));
         lbl1.setText("Drug Name");
         jPanel1.add(lbl1);
-        lbl1.setBounds(60, 180, 80, 21);
+        lbl1.setBounds(60, 160, 80, 21);
 
         lbl2.setForeground(new java.awt.Color(1, 1, 1));
         lbl2.setText("Alternatives");
         jPanel1.add(lbl2);
-        lbl2.setBounds(280, 170, 80, 40);
+        lbl2.setBounds(280, 150, 80, 40);
 
         buttonGroup1.add(r1);
         r1.setForeground(new java.awt.Color(1, 1, 1));
@@ -65,13 +83,18 @@ public class Home extends javax.swing.JFrame {
                 r1FocusGained(evt);
             }
         });
+        r1.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                r1ComponentShown(evt);
+            }
+        });
         r1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 r1ActionPerformed(evt);
             }
         });
         jPanel1.add(r1);
-        r1.setBounds(50, 140, 190, 25);
+        r1.setBounds(50, 120, 190, 25);
 
         buttonGroup1.add(r2);
         r2.setForeground(new java.awt.Color(1, 1, 1));
@@ -87,23 +110,63 @@ public class Home extends javax.swing.JFrame {
             }
         });
         jPanel1.add(r2);
-        r2.setBounds(250, 140, 190, 25);
+        r2.setBounds(250, 120, 190, 25);
 
-        jLabel6.setForeground(new java.awt.Color(1, 1, 1));
-        jLabel6.setText("<html>\n<b>\nRemarks\n</b>");
-        jPanel1.add(jLabel6);
-        jLabel6.setBounds(450, 240, 80, 21);
+        go1.setText("Find");
+        go1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                go1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(go1);
+        go1.setBounds(70, 611, 69, 30);
+
+        go2.setText("Show Details");
+        go2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                go2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(go2);
+        go2.setBounds(270, 610, 110, 31);
+
+        btnClear.setText("Clear");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnClear);
+        btnClear.setBounds(660, 600, 100, 31);
+
+        remarks.setForeground(new java.awt.Color(1, 1, 1));
+        remarks.setText("<html>\n<b>\nRemarks\n</b>");
+        jPanel1.add(remarks);
+        remarks.setBounds(450, 230, 130, 21);
+
+        list2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane4.setViewportView(list2);
+
+        jPanel1.add(jScrollPane4);
+        jScrollPane4.setBounds(238, 190, 180, 400);
+
+        list1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Isoniazid", "Ethambutol", "Pyrazinamide", "amikacin", "Bedaquiline", "Linezolid", "Sulfatrim", "Bactrim", "Flagyl", "Xiafaxan", "Dificid", "Xermelo", "opium", "Xermelo", "opium", "Eplerenone", "spironolactone", "Aspirin", "Antiplatelets", "Diuretics" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        list1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane2.setViewportView(list1);
+
+        jPanel1.add(jScrollPane2);
+        jScrollPane2.setBounds(30, 190, 160, 400);
 
         TextArea.setColumns(20);
         TextArea.setRows(5);
         jScrollPane1.setViewportView(TextArea);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(450, 267, 480, 330);
-        jPanel1.add(list1);
-        list1.setBounds(30, 210, 140, 390);
-        jPanel1.add(list2);
-        list2.setBounds(250, 210, 140, 390);
+        jScrollPane1.setBounds(450, 260, 480, 330);
 
         tfSearch.setText("Search Drugs");
         tfSearch.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -117,7 +180,7 @@ public class Home extends javax.swing.JFrame {
             }
         });
         jPanel1.add(tfSearch);
-        tfSearch.setBounds(690, 140, 240, 40);
+        tfSearch.setBounds(690, 110, 240, 40);
 
         searchBtn.setText("Search");
         searchBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -126,7 +189,7 @@ public class Home extends javax.swing.JFrame {
             }
         });
         jPanel1.add(searchBtn);
-        searchBtn.setBounds(840, 190, 90, 31);
+        searchBtn.setBounds(840, 160, 90, 31);
 
         jLabel3.setBackground(new java.awt.Color(7, 10, 11));
         jLabel3.setForeground(new java.awt.Color(1, 1, 1));
@@ -141,9 +204,9 @@ public class Home extends javax.swing.JFrame {
         jPanel1.add(jLabel2);
         jLabel2.setBounds(450, 20, 52, 50);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("/media/akash/HDD_One/jj-ying-7JX0-bfiuxQ-unsplash.jpg")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon("/media/akash/HDD_One/christian-perner-UKLIuV8rAks-unsplash.jpg")); // NOI18N
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(0, 0, 960, 630);
+        jLabel1.setBounds(0, 0, 960, 660);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -153,7 +216,7 @@ public class Home extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 619, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 660, Short.MAX_VALUE)
         );
 
         pack();
@@ -168,7 +231,20 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_r1ActionPerformed
 
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
-        // TODO add your handling code here:
+       lbl1.setVisible(false);
+       lbl2.setVisible(false);
+       list1.setVisible(false);
+       list2.setVisible(false);
+       remarks.setText("Search Results :");
+       TextArea.setText("");
+       
+       String srch=tfSearch.getText();
+        if("Rifampicin".equals(srch)){
+          TextArea.setText("Rifampicin, also known as rifampin, \nis an antibiotic used to treat several types of bacterial infections, \nincluding tuberculosis, Mycobacterium avium complex, leprosy, and Legionnaires' disease.\nRifampicin is of the rifamycin group of antibiotics. \nIt works by stopping the production of RNA by bacteria.");
+        } else {
+           TextArea.setText("");
+           TextArea.setText("Sorry, The Drug was not found in our database");
+        }
     }//GEN-LAST:event_searchBtnActionPerformed
 
     private void tfSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSearchActionPerformed
@@ -178,16 +254,152 @@ public class Home extends javax.swing.JFrame {
     private void r1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_r1FocusGained
 lbl1.setText("Drug Name"); 
 lbl2.setText("Alternatives"); 
+lbl2.setVisible(true);
+list2.setVisible(true);
+lbl1.setVisible(true);
+list1.setVisible(true);
     }//GEN-LAST:event_r1FocusGained
 
     private void r2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_r2FocusGained
 lbl1.setText("Illness"); 
 lbl2.setText("Drugs"); 
+list1.setModel(model);
+list2.setVisible(false);
+go2.setVisible(false);
+lbl2.setVisible(false);
+ model.clear();
+ TextArea.setText("");
+ model.addElement("Heart Attack");
+ model.addElement("Diarrohea");
+ model.addElement("Tubercluosis");
+ model.addElement("Stroke");
+ model.addElement("Pneumonia");
+ remarks.setText("Drugs");
     }//GEN-LAST:event_r2FocusGained
 
     private void tfSearchFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfSearchFocusGained
 tfSearch.setText("");
     }//GEN-LAST:event_tfSearchFocusGained
+
+    private void r1ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_r1ComponentShown
+        // TODO add your handling code here:
+    }//GEN-LAST:event_r1ComponentShown
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+r1.setSelected(true); 
+r1.requestFocus(true);
+    }//GEN-LAST:event_formWindowActivated
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowOpened
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+      list1.setVisible(true);
+      list2.setVisible(true);
+      lbl1.setVisible(true);
+      lbl2.setVisible(true);
+      TextArea.setText("");
+    }//GEN-LAST:event_btnClearActionPerformed
+ 
+    private void go1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_go1ActionPerformed
+     if(r1.isSelected()){
+        if(list1.getSelectedIndex()==0)
+      { 
+        model.clear();
+        list2.setModel(model);
+        model.addElement("Rifampicin"); 
+        model.addElement("Rifabutin");
+        model.addElement("rifampin");
+      } else if(list1.getSelectedIndex()==1)
+      {
+        model.clear();
+        list2.setModel(model);
+        model.addElement("moxifloxacin"); 
+        model.addElement("amoxicillin");
+        model.addElement("cefdinir");
+      } else if(list1.getSelectedIndex()==2)
+      {
+        model.clear();
+        list2.setModel(model);
+        model.addElement("ethionamide"); 
+        model.addElement("rifapentine");
+        model.addElement("Rifabutin");
+      } else if(list1.getSelectedIndex()==3)
+      {
+        model.clear();
+        list2.setModel(model);
+        model.addElement("ciprofloxacin"); 
+        model.addElement("nitrofurantoin");
+      } else if(list1.getSelectedIndex()==4)
+      {
+        model.clear();
+        list2.setModel(model);
+        model.addElement("Ethambutol"); 
+        model.addElement("moxifloxacin");
+      }
+     } else {
+       if(list1.getSelectedIndex()==0)
+       {
+         TextArea.setText("");
+         TextArea.append("Aspirin\n");
+         TextArea.append("Warfarin\n");
+       } else if(list1.getSelectedIndex()==1)
+       {
+         TextArea.setText("");
+         TextArea.append("Loperamide\n");
+         TextArea.append("Azithromycin\n");
+       } else if(list1.getSelectedIndex()==2)
+       {
+         TextArea.setText("");
+         TextArea.append("Isonazid\n");
+         TextArea.append("Rifabutin\n");
+         TextArea.append("Rifampin\n");
+       } else if(list1.getSelectedIndex()==3)
+       {
+         TextArea.setText("");
+         TextArea.append("Tissue Plasminogen Activator 'tPA'\n");
+       } else if(list1.getSelectedIndex()==4)
+       {
+         TextArea.setText("");
+         TextArea.append("Macrolide\n");
+         TextArea.append("TetraCyclines\n");
+         TextArea.append("Fluroquinolones\n");
+       }
+     }
+    }//GEN-LAST:event_go1ActionPerformed
+
+    private void go2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_go2ActionPerformed
+      if(list1.getSelectedIndex()==0 && list2.getSelectedIndex()==0)
+      {
+          TextArea.setText("");
+          TextArea.append("Rifampicin, also known as rifampin. \nIt is an antibiotic used to treat several types of bacterial infections, \nincluding tuberculosis, Mycobacterium avium complex, leprosy, \nand Legionnaires' disease. \nRifampicin is of the rifamycin group of antibiotics. \nIt works by stopping the production of RNA by bacteria.");
+      } else if(list1.getSelectedIndex()==0 && list2.getSelectedIndex()==1)
+      {
+          TextArea.setText("");
+          TextArea.append("P168 Rifabutin is a useful alternative to rifampicin. \nIt is used in the treatment of active TB/HIV co-infection | Thorax. Accorp Sp.");
+      } else if(list1.getSelectedIndex()==0 && list2.getSelectedIndex()==2)
+      {
+          TextArea.setText("");
+          TextArea.append("Rifampin is an antibiotic that is used to treat or prevent tuberculosis (TB). \nRifampin may also be used to reduce certain bacteria in your nose and throat \nthat could cause meningitis or other infections.");
+      } else if(list1.getSelectedIndex()==1 && list2.getSelectedIndex()==0)
+      {
+          TextArea.setText("");
+          TextArea.append("Moxifloxacin is a fluoroquinolone (flor-o-KWIN-o-lone) \nantibiotic that fights bacteria in the body. \nMoxifloxacin is used to treat different types of bacterial infections of the skin, sinuses, lungs, or stomach.");
+      } else if(list1.getSelectedIndex()==1 && list2.getSelectedIndex()==1)
+      {
+          TextArea.setText("");
+          TextArea.append("Amoxicillin is a penicillin antibiotic that fights bacteria. \nAmoxicillin is used to treat many different types of infection caused by bacteria, \nsuch as tonsillitis, bronchitis, pneumonia, and infections of the ear, nose, throat, skin, or urinary tract.");
+      } else if(list1.getSelectedIndex()==1 && list2.getSelectedIndex()==2)
+      {
+          TextArea.setText("");
+          TextArea.append("Cefdinir, also known as Omnicef, is a semi-synthetic, \nbroad-spectrum antibiotic belonging to the third generation of the cephalosporin class. \nIt has been proven to be effective for the treatment of common bacterial infections in the ear, sinus, throat, lungs, and skin");
+      } else if(list1.getSelectedIndex()==2 && list2.getSelectedIndex()==0)
+      {
+          TextArea.setText("");
+          TextArea.append("Ethionamide is an antibiotic used to treat tuberculosis. Specifically it is used, along with other antituberculosis medications, to treat active multidrug-resistant tuberculosis");
+      } 
+    }//GEN-LAST:event_go2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -226,19 +438,24 @@ tfSearch.setText("");
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea TextArea;
+    private javax.swing.JButton btnClear;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton go1;
+    private javax.swing.JButton go2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel lbl1;
     private javax.swing.JLabel lbl2;
-    private java.awt.List list1;
-    private java.awt.List list2;
+    private javax.swing.JList<String> list1;
+    private javax.swing.JList<String> list2;
     private javax.swing.JRadioButton r1;
     private javax.swing.JRadioButton r2;
+    private javax.swing.JLabel remarks;
     private javax.swing.JButton searchBtn;
     private javax.swing.JTextField tfSearch;
     // End of variables declaration//GEN-END:variables
